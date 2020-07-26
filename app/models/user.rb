@@ -1,4 +1,5 @@
 class User < ApplicationRecord
+  
   before_save { self.email.downcase! }
   validates :name, presence: true, length: { maximum: 50 }
   validates :email, presence: true, length: { maximum: 255 },
@@ -42,7 +43,7 @@ class User < ApplicationRecord
     favorite.destroy if favorite
   end
   
-  def favorited_by?(user)
-    favorites.where(user_id: user.id).exists?
+  def favorites?(micropost)
+    favorites.where(micropost_id: micropost.id).exists?
   end
 end

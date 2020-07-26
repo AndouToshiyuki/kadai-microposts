@@ -1,11 +1,11 @@
 <% if logged_in? %>
-  <% if current_user.favorite(microposts) %>
-    <%= form_with(model: current_user.favorites.find(user_id: user.id, micropost_id: micropost.id)) do |f| %>
+  <% if current_user.favorites?(@micropost) %>
+    <%= form_with(model: current_user.favorites.find(micropost_id: micropost.id),local:true,method: :destroy) do |f| %>
       <%= hidden_field_tag :micropost_id, :user_id %>
       <%= f.submit 'unfavorite', class: 'btn btn-success btn-block' %>
     <% end %>
   <% else %>
-  <%= form_with(model: current_user.favorites.find(user_id: user.id, micropost_id: micropost.id)) do |f| %>
+  <%= form_with(model: current_user.favorites.build,local:true,method: :create) do |f| %>
       <%= hidden_field_tag :micropost_id, :user_id %>
       <%= f.submit 'favorite', class: 'btn btn-success btn-block' %>
     <% end %>
