@@ -1,0 +1,13 @@
+<% if logged_in? %>
+  <% if current_user.favorite(microposts) %>
+    <%= form_with(model: current_user.favorites.find(user_id: user.id, micropost_id: micropost.id)) do |f| %>
+      <%= hidden_field_tag :micropost_id, :user_id %>
+      <%= f.submit 'unfavorite', class: 'btn btn-success btn-block' %>
+    <% end %>
+  <% else %>
+  <%= form_with(model: current_user.favorites.find(user_id: user.id, micropost_id: micropost.id)) do |f| %>
+      <%= hidden_field_tag :micropost_id, :user_id %>
+      <%= f.submit 'favorite', class: 'btn btn-success btn-block' %>
+    <% end %>
+  <% end %>
+<% end %>
