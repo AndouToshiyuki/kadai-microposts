@@ -40,6 +40,7 @@ class UsersController < ApplicationController
   end
   
   def likes
+    @user = User.find(params[:id])
     
   end
   
